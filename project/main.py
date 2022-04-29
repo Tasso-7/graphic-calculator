@@ -1,1 +1,1 @@
-import disply
+import display
