@@ -14,7 +14,7 @@ def cartesian_generation(pos_X,pos_Y,sizeX,sizeY):
     goto(pos_X+sizeX,pos_Y)
     goto(pos_X,pos_Y)
 
-def display_function(pos_X,pos_Y,sizeX,sizeY,pizel_value,data):
+def display_function(pos_X,pos_Y,sizeX,data):
     penup()
     goto(pos_X-sizeX,pos_Y)
     pendown()
@@ -40,5 +40,5 @@ def showfunction(pos_X,pos_Y,sizeX,sizeY,pixel_value,operation):
     for j,i in data.items():
         newdata[j] = elab.clamp(i,-sizeY + pos_Y,sizeY + pos_Y)
     data = newdata
-    display_function(pos_X,pos_Y,sizeX,sizeY,pixel_value,data)
+    display_function(pos_X,pos_Y,sizeX,data)
     return data
