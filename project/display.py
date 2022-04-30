@@ -2,6 +2,7 @@ from turtle import *
 import elab
 
 def cartesian_generation(pos_X,pos_Y,sizeX,sizeY):
+    clear()
     penup()
     goto(pos_X,pos_Y)
     pendown()
@@ -32,7 +33,7 @@ def showfunction(pos_X,pos_Y,sizeX,sizeY,pixel_value,operation):
         lastevalue += pixel_value
     for j,i in values.items():
         if(not (i == 0 or i == 1 or i == -1)):
-            data[j] = elab.elab(operation,i) / pixel_value
+            data[j] = (elab.elab(operation,i) / pixel_value) + pos
         else:
             data[j] = 0
     newdata = {}
