@@ -48,3 +48,4 @@ def showdata(data):
 if __name__ == "__main__":
     while True:
         ask_data()
+        print("\n"*5)
