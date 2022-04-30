@@ -33,7 +33,7 @@ def showfunction(pos_X,pos_Y,sizeX,sizeY,pixel_value,operation):
         lastevalue += pixel_value
     for j,i in values.items():
         if(not (i == 0 or i == 1 or i == -1)):
-            data[j] = (elab.elab(operation,i) / pixel_value) + pos
+            data[j] = (elab.elab(operation,i) / pixel_value) + pos_Y
         else:
             data[j] = 0
     newdata = {}
