@@ -36,7 +36,7 @@ def showfunction(pos_X,pos_Y,sizeX,sizeY,pixel_value,operation):
             data[j] = 0
     newdata = {}
     for j,i in data.items():
-        newdata[j] = clamp(i,-sizeY + pos_Y,sizeY + pos_Y)
+        newdata[j] = elab.clamp(i,-sizeY + pos_Y,sizeY + pos_Y)
     data = newdata
     display_function(pos_X,pos_Y,sizeX,sizeY,pixel_value,data)
     return data
