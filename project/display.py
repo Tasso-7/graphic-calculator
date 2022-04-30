@@ -23,6 +23,7 @@ def display_function(pos_X,pos_Y,sizeX,sizeY,pizel_value,data):
         x += 1  
 
 def showfunction(pos_X,pos_Y,sizeX,sizeY,pixel_value,operation):
+    operation = elab.fixed_operation(operation)
     values = {}
     data = {}
     lastevalue = pixel_value * (0-sizeX)
