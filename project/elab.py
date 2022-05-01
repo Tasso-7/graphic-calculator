@@ -45,13 +45,14 @@ def elab(operation,num):
     x = eval(operation.replace("x",str(num)).replace("^","**"))
     return x
 
-operations = ["+","-","*","/","%","^","=","(",")",","]
+operations = ["+","-","*","/","%","^","=",",","(",")"]
 
 def fixed_operation(operation):
     global operations
     x = False
     op = True
     precedent_op = True
+    close_brackets = False
     newoperation = ""
     for i in operation:
         precedent_op = op
@@ -61,10 +62,13 @@ def fixed_operation(operation):
                 op = True
         if i == "x":
             x = True
-            if not (op or precedent_op):
+            if not (op or precedent_op or close_brackets):
                 newoperation += "*x"
             else:
                 newoperation += "x"
+            close_brackets = False
+        elif x == ")":
+                close_brackets = True
         else:
             if not x:
                 newoperation += i
@@ -74,6 +78,7 @@ def fixed_operation(operation):
                 else:
                     newoperation += "*" + i
                 x = False
+            close_brackets = False
     return newoperation
 
 if __name__ == "__main__":
