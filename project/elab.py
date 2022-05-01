@@ -1,5 +1,37 @@
-def elab(operation,num):
-    return eval(operation.replace("x",str(num)))
+import main,math
+
+def abs(num):
+    if num >= 0:
+        return num
+    else:
+        return num * -1
+
+def sin(angle):
+    return math.sin(angle)
+
+def cos(angle):
+    return math.cos(angle)
+
+def tan(angle):
+    return math.tan(angle)
+
+def log(base,num):
+    return math.log(num,base)
+
+def sqrt(num):
+    return math.sqrt(num)
+
+def factorial(num):
+    return math.factorial(num)
+
+def MCD(n1,n2):
+    if n2 == 0:
+        return n1
+    else:
+        return MCD(n2,n1%n2)
+
+def mcm(n1,n2):
+    return (n1 * n2) / MCD(n1,n2)
 
 def clamp(num,min,max):
     if num <= min:
@@ -9,11 +41,17 @@ def clamp(num,min,max):
     else:
         return num
 
+def elab(operation,num):
+    x = eval(operation.replace("x",str(num)).replace("^","**"))
+    return x
+
+operations = ["+","-","*","/","%","^","=","(",")",","]
+
 def fixed_operation(operation):
-    operations = ["+","-","*","/","%"]
+    global operations
     x = False
-    op = False
-    precedent_op = False
+    op = True
+    precedent_op = True
     newoperation = ""
     for i in operation:
         precedent_op = op
@@ -37,3 +75,6 @@ def fixed_operation(operation):
                     newoperation += "*" + i
                 x = False
     return newoperation
+
+if __name__ == "__main__":
+    main.Main()

@@ -1,27 +1,63 @@
 from turtle import *
-import elab
+import elab,main
 
-def cartesian_generation(pos_X,pos_Y,sizeX,sizeY):
+def cartesian_generation(pos_X,pos_Y,sizeX,sizeY,pixel_value,offset):
+    #x and y axis
+    color("gray")
+    pensize(3)
     clear()
+
     penup()
-    goto(pos_X,pos_Y)
-    pendown()
     goto(pos_X,pos_Y + sizeY)
+    pendown()
     goto(pos_X,pos_Y - sizeY)
     penup()
+
     goto(pos_X-sizeX,pos_Y)
     pendown()
     goto(pos_X+sizeX,pos_Y)
-    goto(pos_X,pos_Y)
+    pensize(2)
+    color("light gray")
 
-def display_function(pos_X,pos_Y,sizeX,data):
+    pixel_1 = 1/pixel_value
+
+    #other elements
+    
+    for j,size in enumerate([sizeY,sizeX]):
+        actual = (-size)
+        while not actual%pixel_1 == 0:
+            actual += 1
+
+        while actual < size:
+            actual += pixel_1
+            penup()
+            if j == 0:
+                goto((pos_X - offset),actual + pos_Y)
+                pendown()
+                goto((pos_X + offset),actual + pos_Y)
+
+            else:
+                goto(actual + pos_X, (pos_Y - offset))
+                pendown()
+                goto(actual + pos_X, (pos_Y + offset))
+
+    pensize(1)
+    color("black")
+
+def display_function(pos_X,sizeX,data,pos_Y):
     penup()
-    goto(pos_X-sizeX,pos_Y)
+    goto(pos_X-sizeX,(pos_Y))
     pendown()
     x = pos_X - sizeX
     for i in data.items():
-        goto(x,i[1])
-        x += 1  
+        try:
+            goto(x,i[1])
+            pendown()
+            x += 1
+        except:
+            penup()
+            goto(x,0)
+            x += 1  
 
 def showfunction(pos_X,pos_Y,sizeX,sizeY,pixel_value,operation):
     operation = elab.fixed_operation(operation)
@@ -31,6 +67,7 @@ def showfunction(pos_X,pos_Y,sizeX,sizeY,pixel_value,operation):
     for i in range(pos_X-sizeX,pos_X+sizeX+1):
         values[i] = lastevalue
         lastevalue += pixel_value
+
     for j,i in values.items():
         if(not (i == 0 or i == 1 or i == -1)):
             data[j] = (elab.elab(operation,i) / pixel_value) + pos_Y
@@ -39,6 +76,9 @@ def showfunction(pos_X,pos_Y,sizeX,sizeY,pixel_value,operation):
     newdata = {}
     for j,i in data.items():
         newdata[j] = elab.clamp(i,-sizeY + pos_Y,sizeY + pos_Y)
+
     data = newdata
-    display_function(pos_X,pos_Y,sizeX,data)
+    display_function(pos_X,sizeX,data,pos_Y)
     return data
+
+if __name__ == "__main__":    main.Main()
