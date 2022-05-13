@@ -63,9 +63,9 @@ def fixed_operation(operation):
         if i == "x":
             x = True
             if not (op or precedent_op or close_brackets):
-                newoperation += "*x"
+                newoperation += "*(x)"
             else:
-                newoperation += "x"
+                newoperation += "(x)"
             close_brackets = False
         elif x == ")":
                 close_brackets = True

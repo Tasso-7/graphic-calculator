@@ -18,6 +18,7 @@ def ask_info(datatipe,question,predef):
         error = True
         try:
             x = input(question + f"({predef})")
+            x.replace("x","(x)")
             if x.strip() == "":
                 error = False
                 return predef
